@@ -7,13 +7,15 @@ export class CreateCompanyInteractor {
 
   async execute(input: CreateCompanyInput): Promise<HttpResponse> {
     try {
-      this.gateway.loggerInfo('Iniciado o request para registar a empresa', JSON.stringify(input))
       const { email, domain, cnpj, name } = input;
+      this.gateway.loggerInfo('Iniciado o request para registar a empresa', {
+        input: JSON.stringify({ name, domain }) 
+      })
       
       const criteria: FindCompanyCriteria = { email, domain }      
       const company = await this.gateway.findCompany(criteria);
       if(company) {
-        this.gateway.loggerInfo('Empresa já cadastrada ', JSON.stringify(criteria))
+        this.gateway.loggerInfo('Empresa já cadastrada', JSON.stringify(criteria))
         return this.presenter.conflict('Empresa já cadastrada');
       }
 
