@@ -1,13 +1,10 @@
-import { LoggerMixin } from "../../../services/logger.service";
+import { CreateCompanyMixin } from "../../../adapters/gateways";
 import { CompanyEntity } from "../entities/company.entity";
 import { CompanyGatewayDependencies, ICreateCompanyGateway, ICompanyRepository, InsertCompany, FindCompanyCriteria } from "../interfaces";
 
-class BaseGateway { constructor(...args: any[]) {} }
-const MixedGateway = LoggerMixin(BaseGateway);
 
-
-export class CreateCompanyGateway  extends MixedGateway implements ICreateCompanyGateway {
-  companyRepository: ICompanyRepository;
+export class CreateCompanyGateway extends CreateCompanyMixin implements ICreateCompanyGateway {
+  companyRepository: ICompanyRepository;  
   
   constructor(params: CompanyGatewayDependencies) {
     super(params)

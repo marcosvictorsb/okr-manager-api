@@ -2,6 +2,7 @@ import { IPresenter } from '../../../protocols/presenter';
 import { HttpResponse } from '../../../protocols/http';
 import { CreateCompanyInput, FindCompanyCriteria, ICreateCompanyGateway, InsertCompany } from "../interfaces";
 
+
 export class CreateCompanyInteractor {
   constructor(private readonly gateway: ICreateCompanyGateway, private presenter: IPresenter) {}
 
@@ -23,6 +24,9 @@ export class CreateCompanyInteractor {
         email, domain, cnpj, name
       }
       const companyCreated = await this.gateway.createCompany(insertCompany)
+
+      this.gateway.sendEmail();
+      this.gateway.loggerInfo('Email enviado');
 
       return this.presenter.created(companyCreated);
     }catch(error: any){

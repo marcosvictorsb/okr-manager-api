@@ -1,4 +1,4 @@
-import { ILoggerMixin } from "../../../services";
+import { CreateCompanyMixin } from "../../../adapters/gateways/";
 import { CompanyEntity } from "../entities/company.entity";
 import { CreateCompanyInteractor } from "../usecase/create.company.interactor";
 
@@ -20,9 +20,12 @@ export type CreateCompanyControllerDependencies = {
   interactor: CreateCompanyInteractor
 }
 
-export interface ICreateCompanyGateway extends ILoggerMixin {
+export interface ICreateCompanyGateway   {
   createCompany(company: InsertCompany): Promise<CompanyEntity>;
   findCompany(criteria: FindCompanyCriteria): Promise<CompanyEntity | null>
+  sendEmail(): any;
+  loggerInfo(message: string, data?: any): void;
+  loggerErro(message: string, data?: any): void;
 }
 
 export interface ICompanyRepository {
