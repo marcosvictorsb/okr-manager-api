@@ -4,6 +4,7 @@ import { UserModel } from '../model/user.model';
 import { IEncryption } from '../adapter/encryption.adapter';
 import logger from '../../../config/logger';
 import { CreateUserInteractor } from '../usecases/create.user.interactor';
+import { CreateUserData } from './create.user.interface';
 
 export type FindCriteria = {
   name?: string;
@@ -27,15 +28,7 @@ export type IToken = {
   sign(user: User, secret: string, options: any): string;
 }
 
-export type UserGatewayParams = {
-  repository: IUserRepository;
-  adapters: {
-    encryption: IEncryption;
-    token: IToken;
-  },
-  logger: typeof logger
 
-}
 
 export interface UserControllerParams {
   useCases: {
@@ -44,7 +37,7 @@ export interface UserControllerParams {
 }
 
 export interface IUserGateway {
-  createUser(user: { email: string; password: string }): Promise<User>;
+  createUser(data: CreateUserData): Promise<User>;
   findUserByEmail(email: string): Promise<User | null>;
   getAllUsers(): Promise<User[]>;
   // comparePasswords(plain: string, hashed: string): boolean;

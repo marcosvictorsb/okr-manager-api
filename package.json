@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch src --ext ts --exec ts-node server.ts",
+    "migration:create": "npx sequelize-cli migration:generate --name",
     "migration": "npx sequelize-cli db:migrate"
   },
   "repository": {

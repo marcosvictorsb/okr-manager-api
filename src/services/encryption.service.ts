@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 
 export interface IEncryptionService {
-  generateHashPassword(password: string): string;
+  encryptPassword(password: string): string;
   comparePasswords(password1: string, password2: string): boolean;
 }
 
@@ -14,7 +14,7 @@ export function EncryptionService<T extends new (...args: any[]) => {}>(Base: T)
       this.bcrypt = bcrypt;
     }
   
-    public generateHashPassword(password: string): string {
+    public encryptPassword(password: string): string {
       const SALT_ROUNDS = 10;
       const salt = this.bcrypt.genSaltSync(SALT_ROUNDS);
       const hash = this.bcrypt.hashSync(password, salt);

@@ -2,6 +2,7 @@ import { UserModel } from '../model/user.model';
 import { UserEntity } from '../entities/user.entity';
 import { ModelStatic, Op } from 'sequelize';
 import { DeleteCriteria, FindCriteria, IUserRepository, UpdateCriteria, UserRepositoryParams } from '../interfaces/user.interface';
+import { CreateUserData } from '../interfaces';
 
 export class UserRepository implements IUserRepository  {
   protected model: ModelStatic<UserModel> ;
@@ -28,8 +29,8 @@ export class UserRepository implements IUserRepository  {
     return whereConditions;
   }
 
-  public async create(user: { email: string; password: string }): Promise<UserEntity> {
-    const createdUser = await this.model.create(user);
+  public async create(data: CreateUserData): Promise<UserEntity> {
+    const createdUser = await this.model.create(data);
     return new UserEntity(createdUser);
   }
 
