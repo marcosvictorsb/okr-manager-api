@@ -23,7 +23,7 @@ export type CreateCompanyControllerDependencies = {
 export interface ICreateCompanyGateway   {
   createCompany(company: InsertCompany): Promise<CompanyEntity>;
   findCompany(criteria: FindCompanyCriteria): Promise<CompanyEntity | null>
-  sendEmail(): any;
+  // sendEmail(): any;
   loggerInfo(message: string, data?: any): void;
   loggerErro(message: string, data?: any): void;
 }

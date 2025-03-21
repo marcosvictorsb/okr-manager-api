@@ -25,7 +25,6 @@ export class CreateCompanyInteractor {
       }
       const companyCreated = await this.gateway.createCompany(insertCompany)
 
-      this.gateway.sendEmail();
       this.gateway.loggerInfo('Email enviado');
 
       return this.presenter.created(companyCreated);
