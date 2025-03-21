@@ -5,7 +5,7 @@ import { CreateUserGateway } from '../gateways/create.user.gateway';
 import { CreateUserInteractor } from '../usecases/create.user.interactor';
 import { UserModel } from '../model/user.model';
 import { CreateUserGatewayParams } from '../interfaces/';
-import { CreateUserController } from '../controller/create.user.controllers';
+import { CreateUserController } from '../controllers/create.user.controller';
 import { Presenter } from '../../../protocols/presenter';
 
 
