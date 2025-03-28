@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { createTeamController } from '../factories/create.team.factory';
+import * as controllers from '../factories/'
 
 const router = Router();
 
-router.post("/", (request: Request, response: Response) => createTeamController.createTeam(request, response));
-// router.get("/", (request, response) => userController.getUsers(request, response));
+router.post("/", (request: Request, response: Response) => controllers.createTeamController.createTeam(request, response));
+router.get("/", (request, response) => controllers.getTeamsController.getTeams(request, response));
 
 export default router;

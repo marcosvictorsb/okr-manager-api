@@ -5,7 +5,7 @@ import { ITeamRepository, FindCriteria } from './team.interface';
 
 export type CreateTeamInput = {
   name: string;
-  id_company: number;
+  id_company: number;  
 };
 
 

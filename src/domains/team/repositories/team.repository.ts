@@ -40,13 +40,17 @@ export class TeamRepository implements ITeamRepository  {
     return new TeamEntity(team);
   }
 
-  // public async findAll(): Promise<UserEntity[]> {
-  //   const users = await this.model.findAll();
-  //   return users.map(
-  //     (user: any) =>
-  //       new UserEntity(user),
-  //   );
-  // }
+  public async findAll(criteria: FindCriteria): Promise<TeamEntity[] | null> {
+    const teams = await this.model.findAll({
+      where: this.getConditions(criteria),
+      limit: criteria.limit,
+      raw: true,
+    });
+    return teams.map(
+      (team: TeamEntity) =>
+        new TeamEntity(team),
+    );
+  }
 
   // public async update(criteria: UpdateCriteria, data: Partial<UserEntity>): Promise<UserEntity | null> {
   //   const [affectedRows] = await this.model.update(data, { where: { id: criteria.id } });

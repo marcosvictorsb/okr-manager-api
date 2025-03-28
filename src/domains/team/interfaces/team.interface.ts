@@ -10,12 +10,13 @@ export type TeamRepositoryDependencies = {
 export type FindCriteria = {
   name?: string;
   id_company?: number;
+  limit?: number;
 }
 
 export interface ITeamRepository {
   create(team: InsertCriteria): Promise<TeamEntity>;
   find(criteria: FindCriteria): Promise<TeamEntity | null>;
-//   findAll(): Promise<User[]>;
+  findAll(criteria: FindCriteria): Promise<TeamEntity[] | null>;
 //   update(criteria: UpdateCriteria, data: Partial<User>): Promise<User | null>;
 //   delete(criteria: DeleteCriteria): Promise<boolean>;
 }

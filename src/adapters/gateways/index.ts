@@ -1,3 +1,5 @@
-export * from './get.token.mixed'
 export * from './create.company.gateway'
 export * from './create.user.gateway'
+export * from './create.team.gateway'
+export * from './get.token.mixed'
+export * from './get.teams.gateway'
