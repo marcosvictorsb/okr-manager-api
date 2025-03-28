@@ -2,10 +2,14 @@ import { Request, Response, NextFunction } from 'express';
 import { ObjectSchema } from 'joi';
 
 export const validate = (schema: ObjectSchema) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    const { error } = schema.validate(req.body, { abortEarly: false });
+  return (request: Request, response: Response, next: NextFunction) => {
+    const { error } = schema.validate({
+      ...request.body,
+      ...request.query,
+      ...request.params
+    }, { abortEarly: false });
     if (error) {
-      return res.status(400).json({
+      return response.status(400).json({
         message: 'Os dados fornecidos são inválidos',
         details: error.details.map((detail) => detail.message),
       });

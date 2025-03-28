@@ -14,23 +14,23 @@ export const HttpStatusCode = {
 
 export type HttpResponse = {
   status: number;
-  body: any;
+  body: unknown;
 };
 
 
 export interface IPresenter {
-  OK(response?: any): HttpResponse;
+  OK(response?: unknown): HttpResponse;
   conflict(message: string): HttpResponse;
   noContent(message: string): HttpResponse;
-  created(response: any): HttpResponse;
-  badRequest(response: any): HttpResponse;
-  notFound(response: any): HttpResponse;
-  serverError(error: any): HttpResponse;
+  created(response: unknown): HttpResponse;
+  badRequest(response: unknown): HttpResponse;
+  notFound(response: unknown): HttpResponse;
+  serverError(error?: unknown): HttpResponse;
 }
 
 
 export class Presenter implements IPresenter{
-  OK(response?: any): HttpResponse {
+  OK(response?: unknown): HttpResponse {
     return {
       status: HttpStatusCode.OK,
       body: response,
@@ -51,31 +51,31 @@ export class Presenter implements IPresenter{
     };
   }
 
-  created(response: any): HttpResponse {
+  created(response: unknown): HttpResponse {
     return {
       status: HttpStatusCode.Created,
       body: [response] ,
     };
   }
 
-  badRequest(response: any): HttpResponse {
+  badRequest(response: unknown): HttpResponse {
     return {
       status: HttpStatusCode.BadRequest,
       body: { response },
     };
   }
 
-  notFound(response: any): HttpResponse {
+  notFound(response: unknown): HttpResponse {
     return {
       status: HttpStatusCode.NotFound,
       body: { response },
     };
   }
 
-  serverError(error?: any): HttpResponse {
+  serverError(error?: unknown): HttpResponse {
     return {
       status: HttpStatusCode.ServerError,
-      body: { error: 'Ocorreu um erro interno no servidor. Tente novamente mais tarde.' },
+      body: { error:  error ?? 'Ocorreu um erro interno no servidor. Tente novamente mais tarde.' },
     };
   }
 }

@@ -25,7 +25,10 @@ export class UserRepository implements IUserRepository  {
     if (criteria.password) {
       whereConditions['password'] = criteria.password;
     }
-  
+
+    if(criteria.id_company) {
+      whereConditions['id_company'] = criteria.id_company;
+    }
     return whereConditions;
   }
 
@@ -45,8 +48,19 @@ export class UserRepository implements IUserRepository  {
     return new UserEntity(user);
   }
 
-  public async findAll(): Promise<UserEntity[]> {
-    const users = await this.model.findAll();
+  public async findAll(criteria: FindCriteria): Promise<UserEntity[] | null> {
+    const users = await this.model.findAll({
+      where: this.getConditions(criteria),
+      limit: criteria.limit,
+      attributes: {
+        exclude: ['password'],
+      },     
+      
+      raw: true,
+    });
+
+    // if (!users || users.length === 0) return undefined;
+
     return users.map(
       (user: any) =>
         new UserEntity(user),
