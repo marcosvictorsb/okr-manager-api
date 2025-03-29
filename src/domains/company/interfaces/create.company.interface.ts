@@ -31,7 +31,4 @@ export interface ICreateCompanyGateway   {
 export interface ICompanyRepository {
   create(company: InsertCompany): Promise<CompanyEntity>;
   find(criteria: FindCompanyCriteria): Promise<CompanyEntity | null>;
-  // findAll(): Promise<User[]>;
-  // update(criteria: UpdateCriteria, data: Partial<User>): Promise<User | null>;
-  // delete(criteria: DeleteCriteria): Promise<boolean>;
 }
