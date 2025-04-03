@@ -48,13 +48,15 @@ export class ObjectiveRepository implements IObjectiveRepository {
     return new ObjectiveEntity(objective);
   }
 
-  // public async findAll(): Promise<UserEntity[]> {
-  //   const users = await this.model.findAll();
-  //   return users.map(
-  //     (user: any) =>
-  //       new UserEntity(user),
-  //   );
-  // }
+  public async findAll(criteria: FindObjectiveCriteria): Promise<ObjectiveEntity[] | null> {
+    const users = await this.model.findAll({
+      where: this.getConditions(criteria)
+    });
+    return users.map(
+      (user: ObjectiveEntity) =>
+        new ObjectiveEntity(user),
+    );
+  }
 
   // public async update(criteria: UpdateCriteria, data: Partial<UserEntity>): Promise<UserEntity | null> {
   //   const [affectedRows] = await this.model.update(data, { where: { id: criteria.id } });

@@ -23,6 +23,7 @@ export type ObjectiveRepositoryDependencies = {
 }
 
 export interface IObjectiveRepository {
-  create(company: InsertCriteria): Promise<ObjectiveEntity>;
+  create(objetive: InsertCriteria): Promise<ObjectiveEntity>;
   // find(criteria: FindCompanyCriteria): Promise<CompanyEntity | null>;
+  findAll(criteria: FindObjectiveCriteria): Promise<ObjectiveEntity[] | null>
 }
